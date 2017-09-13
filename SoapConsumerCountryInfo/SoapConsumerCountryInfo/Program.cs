@@ -15,15 +15,18 @@ namespace SoapConsumerCountryInfo
             using (countrySoapClient client = new countrySoapClient("countrySoap"))
             {
                 string countriesXml = client.GetCountries();
-                Console.WriteLine(countriesXml);
+                //Console.WriteLine(countriesXml);
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.LoadXml(countriesXml);
                 XmlNodeList namesXmlList = xmlDocument.GetElementsByTagName("Name");
+                List<String> names = new List<string>();
                 for (int i = 0; i < namesXmlList.Count; i++)
                 {
                     string countryName = namesXmlList[i].InnerText;
-                    Console.WriteLine(countryName);
+                    //Console.WriteLine(countryName);
+                    names.Add(countryName);
                 }
+                Console.WriteLine(string.Join("\n", names));
             }
         }
     }
